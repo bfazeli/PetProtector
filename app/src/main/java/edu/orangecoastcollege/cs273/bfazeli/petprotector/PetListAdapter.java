@@ -2,12 +2,13 @@ package edu.orangecoastcollege.cs273.bfazeli.petprotector;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,18 @@ public class PetListAdapter extends ArrayAdapter<Pet> {
         View view = inflater.inflate(mResourceId, null);
 
         Pet selectedPet = mPetList.get(position);
+
+        // Hook up widgets
+        LinearLayout petListLinearLayout = (LinearLayout) view.findViewById(R.id.petListLinearLayout);
+        TextView petListDetailTextView = (TextView) view.findViewById(R.id.petListDetailTextView);
+        TextView petListNameTextView = (TextView) view.findViewById(R.id.petListNameTextView);
+        ImageView petListImageView = (ImageView) view.findViewById(R.id.petListImageView);
+
+        petListLinearLayout.setTag(selectedPet);
+
+        petListDetailTextView.setText(selectedPet.getDetails());
+        petListImageView.setImageURI(selectedPet.getImageURI());
+        petListNameTextView.setText(selectedPet.getName());
 
         return view;
     }
