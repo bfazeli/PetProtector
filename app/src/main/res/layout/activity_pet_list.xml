@@ -8,34 +8,73 @@
     tools:context="edu.orangecoastcollege.cs273.bfazeli.petprotector.PetListActivity"
     android:orientation="vertical">
 
-    <TextView
-        android:text="@string/enter"
+    <LinearLayout
+        android:id="@+id/gameEntryLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        android:textColor="@color/dark_blue" />
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
-    <ImageView
-        android:layout_height="150dp"
-        app:srcCompat="@drawable/none"
-        android:id="@+id/petImageView"
-        android:layout_width="150dp"
-        android:scaleType="fitCenter"
-        android:contentDescription="@string/photo"
-        android:clickable="true"
-        android:onClick="selectPetImage"
-        android:adjustViewBounds="true"
-        android:layout_gravity="center" />
+        <TextView
+            android:text="@string/enter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textColor="@color/dark_blue" />
 
-    <Button
-        android:text="@string/add_button_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button"
-        android:textAlignment="center"
-        android:gravity="center_vertical|center_horizontal|center"
-        android:layout_gravity="center"
-        android:textSize="20sp" />
+        <ImageView
+            android:layout_height="150dp"
+            app:srcCompat="@drawable/none"
+            android:id="@+id/petImageView"
+            android:layout_width="150dp"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/photo"
+            android:clickable="true"
+            android:onClick="selectPetImage"
+            android:adjustViewBounds="true"
+            android:layout_gravity="center" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/nameEditText"
+            android:hint="Name" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/detailsEditText"
+            android:hint="Pet Details" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/phoneEditText"
+            android:hint="Phone Number"
+            android:inputType="phone"
+            android:phoneNumber="true"/>
+
+        <Button
+            android:text="@string/add_button_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button"
+            android:textAlignment="center"
+            android:gravity="center_vertical|center_horizontal|center"
+            android:layout_gravity="center"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/petListView" />
+
 </LinearLayout>
