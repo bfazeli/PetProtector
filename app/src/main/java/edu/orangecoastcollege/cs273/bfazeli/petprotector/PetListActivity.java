@@ -15,10 +15,13 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PetListActivity extends AppCompatActivity {
 
@@ -27,7 +30,13 @@ public class PetListActivity extends AppCompatActivity {
     // This member variable stores the URI to whatever image has been selected
     // Default: none.png (R.drawable.none)
     private Uri imageUri;
-    private static final int REQUEST_CODE = 100;
+    private static final int REQUEST_CODE_PHOTO = 100;
+    private static final int REQUEST_CODE_CAMERA = 101;
+
+    private DBHelper db;
+    private EditText nameEditText, detailsEditText, phoneEditText;
+    private ListView petListView;
+    private List<Pet> pets;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +78,7 @@ public class PetListActivity extends AppCompatActivity {
             // Convert the ArrayList into an Array of Strings
             String[] perms = new String[permList.size()];
             // Request permissions from the user
-            ActivityCompat.requestPermissions(this, permList.toArray(perms), REQUEST_CODE);
+            ActivityCompat.requestPermissions(this, permList.toArray(perms), REQUEST_CODE_PHOTO);
         }
 
         // If we have all 3 permissions, open ImageGallery:
@@ -79,7 +88,7 @@ public class PetListActivity extends AppCompatActivity {
         {
             // Use an Intent to launch gallery and take pictures
             Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(galleryIntent, REQUEST_CODE);
+            startActivityForResult(galleryIntent, REQUEST_CODE_PHOTO);
         } else Toast.makeText(this,
                 "Per protector requires camera and external storage permission",
                 Toast.LENGTH_LONG).show();
@@ -94,7 +103,7 @@ public class PetListActivity extends AppCompatActivity {
 
         // The intent data is the URI selected from image gallery
         // Decide if the user selected an image:
-        if (data != null && requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+        if (data != null && requestCode == REQUEST_CODE_PHOTO && resultCode == RESULT_OK) {
             // Set the imageURI to the data
             imageUri = data.getData();
             petImageView.setImageURI(imageUri);
